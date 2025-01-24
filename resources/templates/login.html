@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+ <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-image: url('/images/BG.jpeg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .container {
+      text-align: center;
+      width: 300px;
+    }
+
+    .alert {
+      background-color: #f44336; 
+      color: white; 
+      padding: 10px; 
+      margin-bottom: 15px;
+    }
+
+    form {
+      text-align: left; 
+    }
+  </style>
+
+</head>
+<body>
+		<div th:if = "${param.failed}" class ="alert">
+		Invalid Username or Password
+		</div>
+      <form  method="post" th:action="@{/login}">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <p>
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Username" required autofocus>
+        </p>
+        <p>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Password" required>
+         
+        </p>
+	<input type="submit" value="Login">
+      </form>
+</body>
+</html>

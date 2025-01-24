@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th=“https://www.thymeleaf.org”>
+<head>
+<meta charset="UTF-8">
+<title>View Page</title>
+
+<style>
+        body {
+            background-image: url('/images/BG.jpeg');
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        ol {
+            text-align: left;
+            list-style: decimal;
+            padding-left: 20px;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+<h1>View Tickets</h1>
+
+<table border="1">
+	<tr>	
+		<th> Name </th>
+		<th> Age </td>
+		<th> Favorite Sport </td>
+		<th> Ticket Type </td>
+		<th> Email </td>
+		<th> Address </td>
+		<th> Phone </td>
+	</tr>
+	<tr th:each="game : ${mytickets}">
+		<td th:text="${game.name}"></td>
+		<td th:text="${game.age}"></td>
+		<td th:text="${game.sport}"></td>
+		<td th:text="${game.ticket}"></td>
+		<td th:text="${game.email}"></td>
+		<td th:text="${game.address}"></td>
+		<td th:text="${game.phone}"></td>
+		<td><a th:href="@{/edit/{id}(id=${game.id})}">Edit</a></td>
+		<td><a th:href="@{/delete/{id}(id=${game.id})}">Delete</a></td>
+	</tr>
+</table>
+
+<div sec:authorize="isAuthenticated()">
+User's Name: <span sec:authentication="name"></span>
+Roles: <span sec:authentication="principal.authorities"></span>
+<br><br>
+<form action="#" th:action="@{/logout}" method="post">
+<input type="submit" value="Logout">
+</form>
+</div>
+
+
+
+
+	
+<a href="/">Home Page</a>
+</body>
+</html>

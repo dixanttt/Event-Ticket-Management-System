@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Buy Tickets</title> 
+	<style>
+        body {
+            background-image: url('/images/BG.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            text-align: left;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); 
+            border-radius: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+	<h1>Buy Tickets</h1>
+	
+	<form th:action="@{/add}" method="post" th:object="${ticket}">
+		
+		User: <select th:field="*{userId}">
+    	<option th:each="user : ${userList}" th:value="${user.userId}" th:text="${user.userName}" th:sorted="ascending"></option>
+		</select><br>
+
+		
+		Name: <input type="text" th:field="*{name}"><br>
+		Age: <input type="number" th:field="*{age}"><br>
+		EMail: <input type="text" th:field="*{email}"><br>
+		Address: <input type="text" th:field="*{address}"><br>
+		Phone: <input type="number" th:field="*{phone}"><br>
+		Favorite Sport: <select th:field="*{sport}">
+			<option th:each="s : *{sports}" th:text="${s}" th:value="${s}"></option>
+		</select><br> 
+		Ticket: <select th:field="*{ticket}">
+			<option th:each="c : *{tickets}" th:text="${c}" th:value="${c}"></option>
+		</select><br>
+		<input type="submit" value="submit"><br>
+		
+	</form>
+	<a href="/">Home Page</a><br>
+	<a href="/view">View Games</a>
+</body>
+</html>
